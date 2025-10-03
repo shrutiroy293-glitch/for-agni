@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For My Batman ❤️ — A Little Surprise</title>
+  <style>
+    :root{
+      --bg:#0b0f1a;
+      --card:#0f1724;
+      --accent:#ff6b9a;
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.04);
+      --soft: rgba(255,107,154,0.08);
+      font-family: Inter, Avenir, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071226 0%, #0b1220 60%);color:#e6eef6}
+    .wrap{max-width:980px;margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;gap:16px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .bat{width:56px;height:56px;background:#111;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+    .bat svg{filter:drop-shadow(0 4px 14px rgba(0,0,0,0.6));}
+    h1{margin:0;font-size:22px}
+    p.lead{margin:0;color:var(--muted)}
+
+    .hero{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .letter{min-height:240px;position:relative;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,107,154,0.03));border-radius:12px}
+    .from{position:absolute;right:12px;bottom:10px;color:var(--muted);font-size:12px}
+
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+
+    .gallery img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+    .thumbs{display:flex;gap:8px;margin-top:8px}
+    .thumbs img{width:72px;height:72px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent}
+    .thumbs img.active{border-color:var(--accent)}
+
+    .games{display:flex;flex-direction:column;gap:12px}
+    .game-box{background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(255,255,255,0.01));padding:12px;border-radius:10px}
+
+    /* tic-tac-toe */
+    .ttt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:240px}
+    .cell{background:var(--glass);height:72px;display:flex;align-items:center;justify-content:center;font-size:28px;border-radius:8px;cursor:pointer}
+
+    /* memory */
+    .mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:320px}
+    .card-face{background:var(--glass);height:68px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer}
+
+    footer{margin-top:22px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+    .qr-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+    .note{font-size:13px;color:var(--muted)}
+
+    /* confetti placeholder */
+    #confetti{position:fixed;pointer-events:none;inset:0}
+
+    /* responsive */
+    @media(max-width:920px){.hero{grid-template-columns:1fr;}.gallery img{height:220px}} 
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div class="bat" title="For my Batman">
+          <!-- simple bat svg -->
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12c0 0 2-4 7-4 0 0 2.5 0 3 4 0 0 4.5 0 7-4 0 0 3.5 4 5 4 0 0-2.5-6.5-6-6.5 0 0-2.5 0-3 4 0 0-1.5-4-3-4-2.5 0-5 6.5-5 6.5z" fill="black" /></svg>
+        </div>
+        <div>
+          <h1>For My Batman ❤️</h1>
+          <p class="lead">A little surprise — letter, photos, kitten vibes & small games.</p>
+        </div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <button class="btn" id="revealBtn">Open the Letter ✨</button>
+        <button class="btn ghost" id="playAll">Play Surprise</button>
+      </div>
+    </header>
+
+    <main class="hero">
+      <section class="card">
+        <h3 style="margin-top:0">My Letter to You</h3>
+        <div class="letter" id="letter">
+          <div id="letterContent">
+            <!-- Replace the text below with your personal letter. -->
+            <p style="font-size:16px;line-height:1.6">Hey my love — my Batman,<br><br>
+            You are my quiet in the chaos, my laugh in the small hours, and the hero who makes every little thing look braver. Every moment with you is a tiny adventure and I saved this page to say: I love you — more than words on a screen. Here's to our silly jokes, our kitten cuddles, and every midnight we steal together.<br><br>
+            Yours always, <br><strong>Shruti</strong> 💌
+            </p>
+          </div>
+          <div class="from">— with all my heart</div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+          <button class="btn" id="confettiBtn">Celebrate 🎉</button>
+          <button class="btn ghost" id="downloadLetter">Download Letter</button>
+        </div>
+
+        <h4 style="margin-top:18px">Photo Gallery</h4>
+        <div class="gallery">
+          <img id="mainPhoto" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400'><rect width='100%' height='100%' fill='%2308121a'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ff6b9a' font-size='20'>Drop your photos into /images and update the paths in code</text></svg>" alt="main">
+          <div class="thumbs" id="thumbs">
+            <!-- thumbnails are generated by JS. Replace thumbs by your images in /images folder or change the src array -->
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h3 style="margin-top:0">Kitten Corner 🐾</h3>
+        <p class="note">Cute themed stickers and little playful games. (You can replace images in the <code>/images</code> folder.)</p>
+
+        <div class="games">
+          <div class="game-box">
+            <h4 style="margin:6px 0">Tic‑Tac‑Toe — Play with me!</h4>
+            <div class="ttt" id="ttt"></div>
+            <div style="margin-top:10px;display:flex;gap:8px"><button class="btn" id="resetTtt">Reset</button><div id="tttStatus" style="margin-left:auto;color:var(--muted);align-self:center"></div></div>
+          </div>
+
+          <div class="game-box">
+            <h4 style="margin:6px 0">Memory Game — Match the hearts</h4>
+            <div class="mem" id="mem"></div>
+            <div style="margin-top:10px;color:var(--muted)" id="memStatus">Find the matching pairs</div>
+          </div>
+
+          <div class="game-box">
+            <h4 style="margin:6px 0">Quick Quiz — How well does he know you?</h4>
+            <div id="quiz">
+              <p style="margin:6px 0">What's her favourite kitten name?</p>
+              <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost quizOpt">Mittens</button><button class="btn ghost quizOpt">Nala</button><button class="btn ghost quizOpt">Pixel</button></div>
+              <div id="quizResult" style="margin-top:8px;color:var(--muted)"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;align-items:center">
+          <div class="qr-wrap card" style="padding:12px;width:100%;text-align:center">
+            <div id="qrcode"></div>
+            <div class="note">Scan to open this surprise (or tap the link)</div>
+            <a id="selfLink" href="#" style="color:var(--accent);word-break:break-all"></a>
+          </div>
+          <button class="btn" id="copyLink">Copy Link</button>
+        </div>
+
+      </aside>
+    </main>
+
+    <footer>
+      <div>Made with ❤️ & kitten cuddles</div>
+      <div class="note">Tip: Replace images in the <code>/images</code> folder and update the <code>photos</code> array in the code.</div>
+    </footer>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <!-- Small scripts (no build step needed). Replace images by dropping them in /images and editing the photos array below -->
+  <script>
+    /* ---------- Config: update these paths with your photos ---------- */
+    const photos = [
+      // Example: 'images/photo1.jpg', 'images/photo2.jpg'
+      'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23131a25\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23ff6b9a\' font-size=\'22\'>Replace these with your images in /images</text></svg>'
+    ];
+
+    // init gallery
+    const mainPhoto = document.getElementById('mainPhoto');
+    const thumbs = document.getElementById('thumbs');
+    function renderThumbs(){
+      thumbs.innerHTML='';
+      photos.forEach((p,i)=>{
+        const img=document.createElement('img'); img.src=p; img.alt='photo-'+i; if(i===0) img.classList.add('active');
+        img.addEventListener('click',()=>{document.querySelectorAll('#thumbs img').forEach(x=>x.classList.remove('active')); img.classList.add('active'); mainPhoto.src=p});
+        thumbs.appendChild(img);
+      })
+    }
+    renderThumbs();
+
+    // reveal letter animation
+    document.getElementById('revealBtn').addEventListener('click',()=>{
+      const el=document.getElementById('letterContent'); el.style.transform='translateY(0)'; el.style.opacity=1; celebrate();
+    });
+
+    // confetti (tiny)
+    const confettiCanvas=document.getElementById('confetti'); const confettiCtx=confettiCanvas.getContext('2d');
+    function resize(){confettiCanvas.width=innerWidth; confettiCanvas.height=innerHeight}
+    addEventListener('resize',resize); resize();
+    let parts=[];
+    function celebrate(){
+      for(let i=0;i<80;i++){parts.push({x:Math.random()*innerWidth,y:Math.random()*-200,r:Math.random()*6+4,dx:(Math.random()-0.5)*4,dy:Math.random()*3+2,color: ['#ff6b9a','#ffd1e0','#fff2f7'][Math.floor(Math.random()*3)]})}
+      if(!window._confettiRun) runConfetti();
+    }
+    function runConfetti(){window._confettiRun=true; const t=()=>{confettiCtx.clearRect(0,0,innerWidth,innerHeight); parts.forEach((p,i)=>{p.x+=p.dx; p.y+=p.dy; p.dy+=0.06; confettiCtx.fillStyle=p.color; confettiCtx.beginPath(); confettiCtx.ellipse(p.x,p.y,p.r,p.r*0.6,0,0,Math.PI*2); confettiCtx.fill(); if(p.y>innerHeight+50) parts.splice(i,1)}); if(parts.length) requestAnimationFrame(t); else window._confettiRun=false}; t(); }
+    document.getElementById('confettiBtn').addEventListener('click',celebrate);
+
+    // download letter
+    document.getElementById('downloadLetter').addEventListener('click',()=>{
+      const text = document.getElementById('letterContent').innerText;
+      const blob = new Blob([text],{type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='letter.txt'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    // Play Surprise: auto open letter + confetti
+    document.getElementById('playAll').addEventListener('click',()=>{document.getElementById('revealBtn').click(); celebrate();});
+
+    /* --------- Tic tac toe (vs local simple AI) --------- */
+    const ttt = document.getElementById('ttt'); const tttStatus=document.getElementById('tttStatus');
+    let board = Array(9).fill(null);
+    function renderTtt(){ttt.innerHTML=''; board.forEach((v,i)=>{const d=document.createElement('div'); d.className='cell'; d.dataset.i=i; d.textContent=v?v:''; d.addEventListener('click',onTttClick); ttt.appendChild(d)});}
+    function onTttClick(e){const i=+e.currentTarget.dataset.i; if(board[i]) return; board[i]='X'; if(checkWin(board,'X')){tttStatus.textContent='You win! ❤️'; renderTtt(); return;} if(board.every(Boolean)){tttStatus.textContent='Draw'; renderTtt(); return;} aiMove(); renderTtt(); if(checkWin(board,'O')) tttStatus.textContent='Batman wins 😎'; else tttStatus.textContent='Your move';}
+    function aiMove(){ // simple random
+      const empties = board.map((v,i)=>v?null:i).filter(n=>n!==null);
+      if(!empties.length) return; const pick = empties[Math.floor(Math.random()*empties.length)]; board[pick]='O'; }
+    function checkWin(b, p){const combos=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];return combos.some(c=>c.every(i=>b[i]===p));}
+    document.getElementById('resetTtt').addEventListener('click',()=>{board=Array(9).fill(null); tttStatus.textContent='Your move'; renderTtt();}); renderTtt(); tttStatus.textContent='Your move';
+
+    /* --------- Memory Game (simple emoji based fallback) --------- */
+    const mem = document.getElementById('mem'); const memStatus=document.getElementById('memStatus');
+    const icons = ['🐱','💖','🌙','🍰','🌸','🎵','🫧','⭐'];
+    let memCards = shuffle([...icons,...icons]); let memRevealed=[]; let memMatched=0;
+    function renderMem(){mem.innerHTML=''; memCards.forEach((c,i)=>{const d=document.createElement('div'); d.className='card-face'; d.dataset.i=i; d.textContent = memRevealed.includes(i) || memCards[i].matched ? memCards[i] : '' ; d.addEventListener('click',()=>onMemClick(i,d)); mem.appendChild(d)});}
+    function onMemClick(i,el){ if(memRevealed.includes(i) || memCards[i].matched) return; memRevealed.push(i); renderMem(); if(memRevealed.length===2){const [a,b]=memRevealed; if(memCards[a]===memCards[b]){ memCards[a].matched = memCards[b].matched = true; memMatched+=1; memStatus.textContent='Nice! Match found 💘'; } else { memStatus.textContent='Try again'; setTimeout(()=>{memRevealed=[]; renderMem();},800);} memRevealed=[]; if(memMatched===icons.length) memStatus.textContent='You found them all!'; }}
+    function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+    // convert memCards elements to simple values
+    memCards = memCards.map(x=>x);
+    renderMem();
+
+    /* --------- Quiz simple --------- */
+    document.querySelectorAll('.quizOpt').forEach(b=>b.addEventListener('click',()=>{const ok=b.textContent.trim()==='Mittens'; document.getElementById('quizResult').textContent = ok ? 'Correct! 🎉 She loves the name Mittens.' : 'Oh no — not this time 😊 (Try another)';}))
+
+    /* --------- QR code generation for current URL (uses tiny QR lib) --------- */
+    // We'll use a small in-browser QR generator implementation (no external fetch required)
+    // Simple QR code via Google Charts won't work offline; here's a lightweight implementation (QRious) minimal substitute
+    // Instead we create a link and allow the user to copy the page URL. If hosted, this link will be the hosted URL.
+    const linkEl = document.getElementById('selfLink'); linkEl.href = window.location.href; linkEl.textContent = window.location.href;
+    document.getElementById('copyLink').addEventListener('click',async ()=>{try{await navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');}catch(e){prompt('Copy the link:', window.location.href);}});
+
+    // create a small QR using canvas (tiny QR code generator, encoding using escape)
+    function makeSimpleQRCode(text, size=140){
+      // fallback: use an external API if available, else render the link as text. We'll attempt to load an image from chart.googleapis.com
+      const img = document.createElement('img'); img.alt='QR code'; img.width=size; img.height=size;
+      img.src = 'https://chart.googleapis.com/chart?cht=qr&chs='+size+'x'+size+'&chl='+encodeURIComponent(text)+'&chld=L|1';
+      img.onerror = ()=>{img.replaceWith(document.createElement('div').innerText = text)};
+      return img;
+    }
+    document.getElementById('qrcode').appendChild(makeSimpleQRCode(window.location.href));
+
+    /* ---------- small niceties ---------- */
+    // Auto-open letter on first visit (localStorage)
+    if(!localStorage.getItem('surpriseSeen')){ setTimeout(()=>{document.getElementById('revealBtn').click(); localStorage.setItem('surpriseSeen','1')},900); }
+
+    // allow keyboard enter to open letter
+    document.addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('revealBtn').click(); });
+
+  </script>
+</body>
+</html>
