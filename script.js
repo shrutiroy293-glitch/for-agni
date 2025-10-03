@@ -7,7 +7,7 @@ const mainContent = document.getElementById("main-content");
 seal.addEventListener("click", () => {
   envelope.classList.add("open"); // flap opens
   setTimeout(() => {
-    letter.classList.remove("hidden"); // show first greeting
+    letter.classList.remove("hidden"); // show greeting
   }, 1000); 
 
   setTimeout(() => {
