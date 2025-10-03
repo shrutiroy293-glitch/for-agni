@@ -3,10 +3,8 @@ const envelope = document.querySelector(".envelope");
 const seal = document.querySelector(".seal");
 const letter = document.querySelector(".letter");
 const mainContent = document.getElementById("main-content");
-const clickSound = document.getElementById("click-sound");
 
 seal.addEventListener("click", () => {
-  clickSound.play(); // play click sound
   envelope.classList.add("open"); // flap opens
   setTimeout(() => {
     letter.classList.remove("hidden"); // show first greeting
@@ -52,7 +50,6 @@ kitten.addEventListener('click', () => {
     score++;
     scoreDisplay.textContent = 'Score: ' + score;
     kitten.style.display = 'none';
-    clickSound.play(); // play click sound on kitten
   }
 });
 
@@ -61,7 +58,6 @@ setInterval(showKitten, 1500);
 
 // ===================== Click/Tap Burst Hearts =====================
 document.addEventListener("click", function(e) {
-  clickSound.play(); // play click sound for any click
   const heart = document.createElement("div");
   heart.classList.add("heart-burst");
 
