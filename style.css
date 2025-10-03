@@ -176,4 +176,52 @@ section {
 
 /* ================= Game Area ================= */
 .game h2 { color: #d6336c; }
-#game-area { position: relative; width: 400px; height: 300px; margin: 20px auto
+#game-area {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  margin: 20px auto;
+  border: 2px dashed #ff99c8;
+  border-radius: 16px;
+  background: #fff0f5;
+  overflow: hidden;
+}
+#kitten {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+#kitten:hover { transform: scale(1.2) rotate(-5deg); }
+
+/* ================= Score ================= */
+#score {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ff4d88;
+  margin-top: 10px;
+}
+
+/* ================= Footer ================= */
+footer {
+  margin: 30px 0;
+  padding: 15px;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(90deg, #ffb6c1, #ff66a3);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+  header h1 { font-size: 2rem; }
+  header h2 { font-size: 1rem; }
+  .photos { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  #game-area { width: 300px; height: 220px; }
+  #kitten { width: 50px; height: 50px; }
+  .love-letter p { font-size: 1rem; }
+}
