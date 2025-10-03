@@ -58,6 +58,9 @@ setInterval(showKitten, 1500);
 
 // ===================== Click/Tap Burst Hearts =====================
 document.addEventListener("click", function(e) {
+  // Ignore clicks on kitten or seal to avoid overlapping animations
+  if(e.target.id === "kitten" || e.target.classList.contains("seal")) return;
+
   const heart = document.createElement("div");
   heart.classList.add("heart-burst");
 
@@ -89,4 +92,6 @@ function showSlides() {
   slides[slideIndex-1].style.display = "block";  
   setTimeout(showSlides, 3000); // Change image every 3 seconds
 }
-showSlides();
+
+// Run slideshow after DOM is fully loaded
+window.onload = showSlides;
