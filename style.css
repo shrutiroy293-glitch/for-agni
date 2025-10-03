@@ -10,7 +10,47 @@ body {
   position: relative;
 }
 
-/* ================= Envelope / Sealed Letter ================= */
+/* ================= Floating Background Emojis ================= */
+body::before {
+  content: "💖💘💞💝💋💌";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: floatBackground 20s linear infinite;
+  opacity: 0.1;
+  z-index: 0;
+  white-space: pre;
+}
+body::after {
+  content: "💞💌💖💋💘";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 2.5rem;
+  pointer-events: none;
+  animation: floatBackground2 25s linear infinite;
+  opacity: 0.08;
+  z-index: 0;
+  white-space: pre;
+}
+@keyframes floatBackground {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-50px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+@keyframes floatBackground2 {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-100px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+/* ================= Envelope ================= */
 #envelope-screen {
   display: flex;
   flex-direction: column;
@@ -22,14 +62,14 @@ body {
 
 .envelope {
   position: relative;
-  width: 220px;
-  height: 140px;
-  background: #fff;
-  border: 2px solid #ff4d6d;
-  border-radius: 8px;
+  width: 300px;
+  height: 180px;
+  background: linear-gradient(145deg, #ffe6f0, #ffccd9);
+  border: 3px solid #ff4d6d;
+  border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
 .envelope-flap {
@@ -38,9 +78,9 @@ body {
   left: 0;
   width: 0;
   height: 0;
-  border-left: 110px solid transparent;
-  border-right: 110px solid transparent;
-  border-bottom: 70px solid #ff4d6d;
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+  border-bottom: 90px solid #ff4d6d;
   transition: transform 1s ease;
   transform-origin: top;
   z-index: 2;
@@ -59,10 +99,7 @@ body {
   z-index: 3;
   transition: opacity 0.6s ease;
 }
-
-.envelope.open .seal {
-  opacity: 0;
-}
+.envelope.open .seal { opacity: 0; }
 
 .letter {
   margin-top: 20px;
@@ -73,155 +110,9 @@ body {
   box-shadow: 0 6px 12px rgba(0,0,0,0.2);
   animation: fadeIn 1s ease forwards;
 }
+.letter.hidden { display: none; }
+#main-content.hidden { display: none; }
 
-.letter.hidden {
-  display: none;
-}
+@keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
 
-#main-content.hidden {
-  display: none;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-/* ================= Floating Hearts ================= */
-@keyframes floatUp {
-  0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-}
-
-.floating {
-  position: fixed;
-  bottom: -50px;
-  font-size: 2rem;
-  animation: floatUp 6s linear infinite;
-  pointer-events: none;
-  z-index: 5;
-  color: #e75480;
-}
-
-.floating:nth-child(2) { left: 20%; animation-duration: 7s; }
-.floating:nth-child(3) { left: 40%; animation-duration: 5s; }
-.floating:nth-child(4) { left: 60%; animation-duration: 8s; }
-.floating:nth-child(5) { left: 80%; animation-duration: 6s; }
-
-/* ================= Burst Hearts ================= */
-@keyframes burst {
-  0% { transform: scale(0.5); opacity: 1; }
-  70% { transform: translateY(-80px) scale(1.2); opacity: 0.8; }
-  100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
-}
-
-.heart-burst {
-  position: absolute;
-  font-size: 1.5rem;
-  color: #ff4d88;
-  animation: burst 1.2s ease-out forwards;
-  pointer-events: none;
-  z-index: 999;
-}
-
-/* ================= Header ================= */
-header {
-  background: linear-gradient(90deg, #ffb6c1, #ffcce5, #ffb3d9);
-  color: #4b2c36;
-  padding: 25px;
-  border-bottom: 4px solid #ff99c8;
-  border-radius: 0 0 30px 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-header h1 { font-size: 2.5rem; margin: 0; }
-header h2 { font-size: 1.2rem; margin-top: 8px; font-style: italic; }
-
-/* ================= Sections ================= */
-section {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 20px;
-  background: #fffafc;
-  border-radius: 20px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-}
-
-/* ================= Love Letter ================= */
-.love-letter h2 { color: #e75480; margin-bottom: 15px; }
-.love-letter p { line-height: 1.8; font-size: 1.1rem; white-space: pre-line; padding: 10px; }
-.love-letter { 
-  background-image: url("https://img.icons8.com/emoji/48/heart-with-arrow.png"),
-                    url("https://img.icons8.com/emoji/48/kiss-mark.png");
-  background-repeat: repeat;
-  background-size: 40px;
-  opacity: 0.95;
-  border: 2px solid #ff99c8;
-}
-
-/* ================= Gallery ================= */
-.gallery h2 { color: #ff4d88; }
-.photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; padding: 10px; }
-.photos img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.photos img:hover {
-  transform: scale(1.07) rotate(-2deg);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-}
-
-/* ================= Game Area ================= */
-.game h2 { color: #d6336c; }
-#game-area {
-  position: relative;
-  width: 400px;
-  height: 300px;
-  margin: 20px auto;
-  border: 2px dashed #ff99c8;
-  border-radius: 16px;
-  background: #fff0f5;
-  overflow: hidden;
-}
-#kitten {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: transform 0.2s ease;
-}
-#kitten:hover { transform: scale(1.2) rotate(-5deg); }
-
-/* ================= Score ================= */
-#score {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #ff4d88;
-  margin-top: 10px;
-}
-
-/* ================= Footer ================= */
-footer {
-  margin: 30px 0;
-  padding: 15px;
-  font-size: 1rem;
-  color: #fff;
-  background: linear-gradient(90deg, #ffb6c1, #ff66a3);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
-}
-
-/* ================= Responsive ================= */
-@media (max-width: 768px) {
-  header h1 { font-size: 2rem; }
-  header h2 { font-size: 1rem; }
-  .photos { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-  #game-area { width: 300px; height: 220px; }
-  #kitten { width: 50px; height: 50px; }
-  .love-letter p { font-size: 1rem; }
-}
+/*
